@@ -1,0 +1,93 @@
+.recetasGrid{
+    display:flex;
+    flex-direction:column;
+}
+.recetas{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    width:100%;
+    padding:0% 8% 0% 8%;
+    
+
+    .cartaRecetas{
+        display:flex;
+        flex-direction:column;
+        align-content:center;
+        justify-content: center;
+        background-color:white;
+        margin:1%;
+        padding:0%;
+        border-radius:5px;
+        &:hover{
+            box-shadow: 7px 7px 12px 0 rgba(20, 20, 20, 0.3);
+        }
+        h3 {
+            text-align:center;
+            width:50%;
+            margin:-5% 1% 1% 5%;
+            background-color:white;
+            font-size: 18px;
+            color:rgb(0, 0, 0);
+            border-radius: 5px;
+            padding:1%;}
+
+        img {width:100%;
+            padding:auto;
+            margin:0%;
+            border-radius: 5px 5px 0px 0px;
+            }
+        img:hover{background-color: rgb(0, 0, 0);}
+        
+    }   
+    .cardRecetas{
+        display:flex;
+        width:100%;
+        flex-direction:row;
+        align-items:center;
+        .formularioCardRecetas{
+            display:flex;
+            flex-direction:row;
+            margin:0% 1% 1% 1%;
+            width:100%;
+            label{font-size:18px; 
+                margin-left:1%;
+
+                padding-right: 2%;}
+            select{width:40px;height:20px;}
+            .option{
+                text-align: center;
+                width:50px; height:30px;
+                
+            }
+        }    
+        .cta{
+            display:flex;
+            justify-items:center;
+            text-align:center;
+            margin: 0% 2% 2% 2%;
+
+            padding:0%;
+            button{
+                margin: 1% 1% 1% 1%;
+                width: 50px;
+                height:50px;
+                font-size:18px;
+                border-radius:8px;
+                background-color: rgb(43, 191, 55); 
+                border: none;
+                padding:0%;
+                color:white;
+                &:hover{
+                    background-color: rgb(7, 158, 20);
+                }   
+            }
+            
+        } 
+
+    }
+    
+}
+
+
+

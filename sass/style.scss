@@ -1,0 +1,18 @@
+@import"_personas.scss";
+@import"_header.scss";
+@import"_footer.scss";
+@import"recetas.scss";
+@import"_index.scss";
+@import"_direccion.scss";
+//@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+*{
+    body{background-color:rgba(214, 211, 211, 0.484);
+        margin:0%;}
+
+}
+a{
+    text-decoration:none;
+    color:white;
+}
+li{list-style-type: none;} 

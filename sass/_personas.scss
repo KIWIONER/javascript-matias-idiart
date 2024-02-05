@@ -1,0 +1,91 @@
+body{
+    background-color:rgba(214, 211, 211, 0.144)
+}
+.cajas{
+    margin-top:1%;
+    padding:1%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    .accordion {
+        display:flex;
+        justify-content: center;
+        text-align:center;
+        flex-direction:column;
+        width: 700px;
+        margin: 0px auto;
+        color: black;
+        
+        padding: 45px 45px;
+        .container {
+            justify-content:center;
+            background-color:white;
+            justify-items:space-evenly;
+            border-radius:5px;
+            position: relative;
+            width:600px;
+            margin: 10px 0px 10px 0px;
+            .label {
+                display:flex;
+                flex-direction:row;
+                position: relative;
+                align-content: center;
+                align-items:center;
+                justify-content:space-evenly;
+                margin:1% 5% 0% 0%;
+                padding: 10px 10px 10px 10px;
+                font-size: 20px;
+                color: black;
+                cursor: pointer;
+                :before {
+                    //content: '+';
+                    color: black;
+                    margin-right: 5%;
+                    margin-top:1%;
+                    position: absolute;
+                    top: 50%;
+                    right: -5px;
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    }
+                }
+            .content {
+                display:flex;
+                justify-content:center;
+                position: relative;
+                margin:0% 2% 2% 0%;
+                padding:0%;
+                height: 0;
+                font-size: 20px;
+                text-align: justify;
+                width: 100%;
+                overflow: hidden;
+                transition: 0.5s;
+            }
+        }   
+    }
+    .atrasContinuar{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-evenly;
+        .cta {
+            display:flex;
+            justify-content:center;
+            width:150px;
+            height:50px;
+            align-items:center;
+            margin: 1% 1% 1% 0%;
+            background-color: #000000d2;
+            font-size:18px;
+            border:none;
+            border-radius: 5px;
+            color:white;
+            a{text-align:center;}
+    }
+    
+    }
+    .accordion .container.active .content {
+        height: 150px;
+    }
+}
+

@@ -1,0 +1,88 @@
+header{
+
+    .navegador {
+        display:flex;
+        background-color: rgba(0, 0, 0, 0.832);
+        flex-direction:row;
+        justify-content: center;
+        
+        .logo{
+            display:flex;
+            align-content:center;
+            padding:0%;
+        }
+        .nav{
+                width:95%;
+                display:flex;
+                flex-direction:row;
+                list-style-type: none;
+                align-items:center;
+                padding-top:1%;
+            ul{
+                width:100%;
+                justify-content:center;
+                text-align:center;
+                a {
+                    text-decoration: none;
+                    color:white;
+                    font-size: 20px;
+                    padding:1%; 
+                }
+                & :hover{color:rgb(164, 221, 138);}
+                
+            }
+        }
+        
+        
+    }
+    }
+    .navegadorRecetas{
+        display:flex;
+        flex-direction:row;
+        justify-content: center;
+        align-items:center;
+        margin: 1% 0% 0% 0%;
+        //background-color:orange;
+        .listaRecetas{
+            display:flex;
+                flex-direction:row;
+                justify-content:center;
+                list-style-type: none;
+                justify-content:center;
+                align-content:center;
+                margin: 0% ;
+                padding:0%;
+
+                button{
+                    width:12vh;
+                    padding: 1% 0% 0% 0%;
+                    margin: 1%;
+                    background-color:rgba(129, 198, 247, 0.186);
+                    border:none;
+                    //text-align:center;
+                    border-radius:5px;
+                    p{font-size: 12px;}
+                    a {
+                        text-decoration: none;
+                        color:rgb(0, 0, 0);
+                        font-size: 15px;
+                        padding:0% 0% 0% 0%;
+                        
+                    }
+                    & :hover{color:black}
+    
+                    &:hover{
+                        background-color:rgba(200, 213, 248, 0.638);
+                        transform: scale(1.2);
+                        a{margin-right:2%;}
+                    }
+
+                
+                
+            }
+        }
+        
+
+    }
+
+
