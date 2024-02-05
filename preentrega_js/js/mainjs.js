@@ -42,17 +42,11 @@ if(acceso)
         for(let i=3; i>=0; i--){
             switch (producto) {
                 case 'camisetas':    
-                    
                     return 15 * cantidad;
-                    
                 case 'pantalones':
-                    
                     return 25 * cantidad;
-                
                 case 'sudaderas':
-                    
                     return 40 * cantidad;
-            
             }
         }
     }
