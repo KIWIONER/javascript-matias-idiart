@@ -1,88 +1,132 @@
-// preentrega:
-/*
-- carrito de compras:
-    -registro en la página web.
-    1.INICIAR SESIÓN EN LA CUENTA DE CLIENTE.
-    2.ELEGIR UN PRODUCTO PARA AGREGAR EN EL CARRITO
-    3.SACAR UN PRODUCTO DEL CARRITO
-    4.PAGAR LOS PRODUCTOS DEL CARRITO
-    5.ELEGIR METODO DE PAGO (FINANCIACIÓN O TODO JUNTO).
-    */       
 
-//declaramos variables necesarias para el funcionamiento del simulador
-let nombre = 'matias';
-let password = '2292'
-let acceso = false;
-let cantidad;
-let producto;
-let totalCompra;
-const IVA = 1.21;
-let formaDePago;
-let meses;
-//declaro un ciclo for para confirmar las credenciales del usuario hasta 3 intentos.
-for(let i=3; i>=0; i--){
-    let confirmarNombre = prompt('Confirma tu nombre');
-    let confirmarPassword = prompt('Confirma tu contraseña')
-    if((nombre === confirmarNombre) && (password === confirmarPassword)){
-        alert('Bienvenido a tu cuenta '+ nombre );
-        acceso = true;
-        break;
-    }else{
-        alert('algo ha salido mal, vuelve a intentarlo. te quedan '+ i +' intentos')
-        }       
-    }
-// si las credenciales son correctas, el usuario podrá acceder al menú de compra.
-if(acceso)
-    {
-    producto = prompt ('¿Que quieres comprar? \n-1 Pasta 15€ \n-2 Canelones 35€\n-3 fideua 40€')
-    if (producto==='pasta'|| producto==='canelones' || producto === 'fideua'){
-    cantidad = prompt('¿Cuantos '+producto+' comprar?')
-//genero una función para que, cuando el usuario elija un producto, se pueda calcular el precio de la prenda por la cantidad.
-    function carrito (cantidad, producto) {
-        for(let i=3; i>=0; i--){
-            switch (producto) {
-                case 'pasta':    
-                    return 15 * cantidad;
-                case 'canelones':
-                    return 25 * cantidad;
-                case 'fideua':
-                    return 40 * cantidad;
-            }
+
+//Definir los productos
+
+
+function Producto(nombre,stock,precio){
+    this.nombre = nombre;
+    this.stock = stock;
+    this.precio = parseFloat(precio)
+;}
+
+const productos = [
+{ nombre: 'pasta', precio: 20 },
+{ nombre: 'canelones', precio: 30 },
+{ nombre: 'raviolis', precio: 50 },
+{ nombre: 'sopamiso', precio: 15}
+];
+
+const carrito = [];
+
+
+// Función para mostrar los productos disponibles al cliente
+function mostrarProductos(arr){
+    let mensaje =  'Productos disponibles:\n'
+    arr.forEach((el)=> mensaje += el.nombre +' '+ el.precio +'€'+'\n' )
+    alert(mensaje)
+}
+
+
+// Función para permitir elegir los productos 
+function elegirProductos(arr){
+    for (let i = 0 ; i < 3 ; i--){
+        let opciones = arr.map((el)=>`${el.nombre} ${el.precio}€`);
+        let opcion = prompt('Elije un producto:\n' + opciones.join('\n'));
+        let productoElegido = arr.find(el => el.nombre == opcion.split('-')[0]);
+        if(productoElegido){
+            return productoElegido;
+        }else{
+            alert('No hemos encontrado ese producto, inténtalo otra vez.');
         }
     }
-    totalCompra = carrito(cantidad,producto)
-    alert('el total de tu compra es de : '+parseInt(totalCompra)+' €');
-    alert('el total de su compra con IVA es de: '+ parseFloat(totalCompra)*IVA+' €')
-// vuelvo a crear un ciclo para saber cómo quiere pagar el cliente, tarjeta o financiación.
-    formaDePago = prompt('¿Como quieres pagar? \n - Tarjeta \n - Fianciado \n - Presiona X para salir');
-    if(formaDePago == 'tarjeta' || formaDePago =='financiado'){
-            while(formaDePago !='x'){
-                switch (formaDePago) {
-                    case 'tarjeta':
-                        alert('el total a con tarjeta es de '+ parseFloat(totalCompra)*IVA+' €')
-                        alert('Gracias por comprar con nosotros.')
-                    break;
-                    case 'financiado':
-                        meses = prompt('¿En cuantos meses quieres pagar?')
-                        if(meses){
-                            alert('El total a pagar  es de '+ totalCompra/meses+ ' € al mes');
-                            alert('Gracias por comprar con nosotros.')
-                        }else{alert('No has elegido los meses a pagar')
-                        }
-                        break;
-                    default:
-                        alert('No has elegido una forma de pago.')
-                    break;
-                }
-                formaDePago = prompt('Todo listo\n - Presiona X para salir');
-            }           
-        }else{alert('No has ingresado una opción de pago,')}
-    }  
-}else{
-    alert('Se cerrará el carrito')};
-            
+    alert('Uy, algo no ha ido bien, inténtalo de nuevo más tarde.')
+    return null;
+}
 
-        
-        
+//Función para comprar productos.
+function comprarProductos(arr){
+    let continuarComprando = true;
+    while(continuarComprando){
+        let productoElegido = elegirProductos(arr);
+        let cantidad = parseInt(prompt('¿Cuántos '+ productoElegido.nombre + ' quieres llevarte?'));
+
+        agregarAlCarrito(productoElegido,cantidad);
+
+        let respuesta = prompt('¿Quieres seguir comprando? (s/n)');
+        if(!respuesta || respuesta.toLowerCase() !== 's'){
+            continuarComprando = false;
+        }
+    }
+}
+
+// Función para agregar un producto al carrito
+function agregarAlCarrito(el,cantidad){
+    if(!isNaN(cantidad)){
+        carrito.push({nombre: el.nombre, precio: el.precio, cantidad: cantidad});
+    alert ('se han añadido ' + cantidad +' '+ el.nombre + ' al carrito.');
+    }else{
+        alert('La cantidad de productos no es válido. Inténtalo otra vez.')
+    } 
+}
 
 
+// Función para calcular el precio total del carrito con IVA
+function calcularPrecioTotalConIVA(arr){
+    const IVA = 0.21
+    let subtotal = arr.reduce((total,el) => total + (el.precio * el.cantidad), 0);
+    let totalConIVA = subtotal.toFixed(2) *(1 + IVA)
+    return totalConIVA.toFixed(2);
+}
+
+// Función para mostrar el contenido del carrito
+function mostrarCarrito(arr){
+    let mensaje = 'Este es tu carrito:\n';
+    arr.forEach((el) => mensaje += '-' + el.nombre + ' x ' + el.cantidad + ' unidades: ' + (el.precio * el.cantidad) +' €' + '\n');
+    mensaje += 'El total sin IVA es: '+ arr.reduce((total, el) => total + (el.precio * el.cantidad), 0 ) +' €'+'\n';
+    mensaje += 'El total con IVA (21%) es: ' + calcularPrecioTotalConIVA(arr)+' €';
+    alert(mensaje);
+}
+
+// Función para calcular el total con intereses en caso de financiación
+function calcularTotalConInteres(arr, meses) {
+    const interesMensual = 0.02; // 2% de interés mensual
+    let totalConIVA = calcularPrecioTotalConIVA(arr);
+    let totalConInteres = totalConIVA * (1 + interesMensual * meses);
+    return totalConInteres;
+}
+
+//Función para procesar el pago con dos opciones , tarjeta o financiación.
+function procesarPago(arr){
+    for (let i = 0; i < 3; i++){
+    let metodoPago = prompt('Elije cómo quieres pagar: \n tarjeta \nfinanciacion')
+    switch(metodoPago){
+    case 'tarjeta': 
+        let totalConIVA = calcularPrecioTotalConIVA(arr);
+        alert('Hemos hecho un cargo de '+ totalConIVA + ' €' + ' a tu cuenta.\n ¡Gracias por comprar con nosotros!')
+        return;
+    
+    case 'financiacion':
+        let meses = parseInt(prompt('¿En cuantos meses quieres financiar tu compra?'));
+        if(!isNaN(meses) && meses > 0){
+            let totalConIntereses = calcularTotalConInteres(arr,meses);
+            alert('Has elegido financiar tu compra en '+ meses + ' meses. \n El total a pagar con intereses es: '+ totalConIntereses.toFixed(2)+' €');
+            alert('¡Gracias por comprar con nosotros!')
+            return;
+        }else{
+            alert('Algo no ha ido bien, introduce correctamente el número de meses.')
+        }
+        break;
+    default:
+        alert('Ups, algo no ha ido bien, inténtalo de nuevo.')
+        }
+    }
+    alert('Has pasado el numero de intentos disponible. Intentalo más tarde.')
+}
+
+
+
+mostrarProductos(productos);
+comprarProductos(productos);
+mostrarCarrito(carrito);
+calcularTotalConInteres(carrito);
+procesarPago(carrito);
